@@ -1,0 +1,46 @@
+# Development Dockerfile for Django
+FROM python:3.9-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Set work directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        postgresql-client \
+        build-essential \
+        libpq-dev \
+        curl \
+        gettext \
+        netcat-traditional \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install development dependencies
+RUN pip install --no-cache-dir \
+    django-debug-toolbar==4.2.0 \
+    django-extensions==3.2.3 \
+    ipython==8.17.2
+
+# Copy project
+COPY . /app/
+
+# Create directories
+RUN mkdir -p /app/staticfiles /app/media
+
+# Make entrypoint script executable
+RUN chmod +x /app/entrypoint.sh
+
+# Expose port
+EXPOSE 8000
+
+# Development entrypoint
+ENTRYPOINT ["/app/entrypoint.sh"]
