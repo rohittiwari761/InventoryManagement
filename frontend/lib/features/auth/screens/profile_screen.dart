@@ -8,6 +8,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../shared/models/user.dart';
 import '../providers/auth_provider.dart';
 import '../../invoices/providers/invoice_provider.dart';
+import '../../settings/screens/about_legal_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -128,6 +129,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Password Change Section
                   _buildPasswordSection(user),
+
+                  SizedBox(height: 20.h),
+
+                  // About & Legal Section
+                  _buildAboutLegalSection(),
 
                   SizedBox(height: 32.h),
 
@@ -1400,6 +1406,75 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAboutLegalSection() {
+    return Card(
+      elevation: 3,
+      shadowColor: Colors.black.withOpacity(0.1),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AboutLegalScreen(),
+            ),
+          );
+        },
+        borderRadius: BorderRadius.circular(16.r),
+        child: Padding(
+          padding: EdgeInsets.all(20.w),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(12.w),
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade50,
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Icon(
+                  Icons.info_outline,
+                  size: 24.sp,
+                  color: Colors.blue.shade700,
+                ),
+              ),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'About & Legal Information',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textPrimary,
+                        height: 1.2,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      'App info, disclaimers & data sources',
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        color: AppColors.textSecondary,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 18.sp,
+                color: Colors.grey.shade400,
+              ),
+            ],
+          ),
         ),
       ),
     );

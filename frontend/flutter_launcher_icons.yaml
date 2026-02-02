@@ -1,0 +1,42 @@
+# Flutter Launcher Icons Configuration
+# https://pub.dev/packages/flutter_launcher_icons
+
+flutter_launcher_icons:
+  # Path to your app icon image (1024x1024px or higher recommended)
+  image_path: "assets/icon/app_icon.png"
+
+  # Generate icons for Android
+  android: true
+  # Custom Android icon name (optional, defaults to ic_launcher)
+  # android_icon: "ic_launcher"
+
+  # Generate icons for iOS
+  ios: true
+  # iOS icon background color (optional, transparent by default)
+  # ios_background_color: "#FFFFFF"
+
+  # Adaptive icons for Android (API 26+)
+  # Provides better display on different Android launchers
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/icon/app_icon.png"
+
+  # Remove the default Flutter icon alpha
+  remove_alpha_ios: true
+
+  # Web icon configuration (optional)
+  web:
+    generate: true
+    image_path: "assets/icon/app_icon.png"
+    background_color: "#FFFFFF"
+    theme_color: "#2196F3"
+
+  # Windows icon configuration (optional)
+  windows:
+    generate: true
+    image_path: "assets/icon/app_icon.png"
+    icon_size: 256
+
+  # macOS icon configuration (optional)
+  macos:
+    generate: true
+    image_path: "assets/icon/app_icon.png"
